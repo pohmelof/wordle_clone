@@ -8,8 +8,7 @@ import wordsToGuess from './data/words-for-guesses.json';
 import Gameboard from './components/Gameboard/Gameboard';
 import Message from './components/Message/Message';
 
-// let wordExample = wordsToGuess[Math.floor(Math.random()*wordsToGuess.length)];
-let wordExample = 'spout';
+let wordExample = wordsToGuess[Math.floor(Math.random()*wordsToGuess.length)];
 
 function App() {
   const [inputs, setInputs] = useState(getDefaultState());
@@ -74,7 +73,6 @@ function App() {
     return {start, end, currentRow};
   }
   
-  // check how many times a letter repeats in a word
   const checkForRepeatLetters = (arr) => {
     const repeats = {};
     arr.forEach(item => {
@@ -86,7 +84,7 @@ function App() {
     })
     return repeats;
   };
-  
+
   const matchUserInputToWord = (userInput, wordToMatch, repeats) => {
     return [...userInput.map((item, index) => {
       // handle letter in correct position
