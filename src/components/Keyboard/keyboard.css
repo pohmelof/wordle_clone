@@ -1,0 +1,52 @@
+.keyboard {
+    margin-top: 40px;
+    display: grid;
+    max-width: 500px;
+    width: 95%;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    grid-template-rows: repeat(3, minmax(40px, 1fr));
+    align-items: center;
+    justify-items: center;
+}
+
+@media (orientation: portrait) {
+    .keyboard {
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 30px;
+    }
+}
+
+.firstRow,
+.secondRow,
+.thirdRow {
+    display: grid;
+    /* width: 100%; */
+    gap: 5px;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+
+}
+.thirdRow {
+    grid-template-columns: 1.5fr repeat(7, 1fr) 1.5fr;
+} 
+
+.kbBtn {
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--color-dark);
+    padding: 15px 10px;
+    background-color: var(--bg-color-light);
+    border-radius: 5px;
+    user-select: none;
+    animation-delay: 1s;
+    animation-duration: 0ms;
+    cursor: pointer;
+    box-shadow: var(--box-shadow-highlight);
+}
+
+.kbBtn:active {
+    background-color: gray;
+    transform: scale(0.9);
+}

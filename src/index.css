@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+:root {
+  --bg-color-dark: #333;
+  --bg-color-light: #eee;
+  --bg-color-danger: rgb(211, 65, 65);
+  --bg-color-correctPos: rgb(41, 155, 41);
+  --bg-color-wrongPos: rgb(201, 201, 45);
+  --bg-color-notPresent: gray;
+  --color-dark: black;
+  --color-light: white;
+  --box-shadow-highlight: 1px 1px 1px 1px black;
+}

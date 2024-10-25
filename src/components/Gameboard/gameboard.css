@@ -1,0 +1,86 @@
+.gameboard {
+    display: grid;
+    place-items: center;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-template-columns: repeat(5, min-content);
+    grid-template-rows: repeat(6, 1fr);
+}
+.cell {
+    border: 1px solid var(--color-dark);
+    box-shadow: var(--box-shadow-highlight);
+    background-color: var(--bg-color-light);
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    width: 55px;
+    height: 55px;
+    font-size: 1.5rem;
+  }
+.correctPos {
+    animation: 0.6s linear cell-reveal-correctPos;
+    animation-fill-mode: forwards;
+}
+.wrongPos {
+    animation: 0.6s linear cell-reveal-wrongPos;
+    animation-fill-mode: forwards;
+}
+.notPresent {
+    animation: 0.6s linear cell-reveal-dontExist;
+    animation-fill-mode: forwards;
+}
+
+@keyframes cell-reveal-correctPos {
+    0% {
+      transform: scaleY(1);
+      background-color: var(--bg-color-light);
+    }
+    50% {
+      transform: scaleY(0);
+      background-color: var(--bg-color-light);
+    }
+    51% {
+      transform: scaleY(0);
+      background-color: var(--bg-color-correctPos);
+    }
+    100% {
+      transform: scaleY(1);
+      background-color: var(--bg-color-correctPos);
+    }
+}
+@keyframes cell-reveal-wrongPos {
+    0% {
+      transform: scaleY(1);
+      background-color: var(--bg-color-light);
+    }
+    50% {
+      transform: scaleY(0);
+      background-color: var(--bg-color-light);
+    }
+    51% {
+      transform: scaleY(0);
+      background-color: var(--bg-color-wrongPos);
+    }
+    100% {
+      transform: scaleY(1);
+      background-color: var(--bg-color-wrongPos);
+    }
+}
+@keyframes cell-reveal-dontExist {
+    0% {
+      transform: scaleY(1);
+      background-color: var(--bg-color-light);
+    }
+    50% {
+      transform: scaleY(0);
+      background-color: var(--bg-color-light);
+    }
+    51% {
+      transform: scaleY(0);
+      background-color: var(--bg-color-notPresent);
+    }
+    100% {
+      transform: scaleY(1);
+      background-color: var(--bg-color-notPresent);
+    }
+}
