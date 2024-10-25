@@ -3,11 +3,13 @@ import './App.css'
 import Header from './components/Header/Header'
 import Keyboard from './components/Keyboard/Keyboard';
 import {getDefaultState} from './data/defaultState';
-import dictionary from './data/dictionary_five.json'
+import dictionary from './data/dictionary_five.json';
+import wordsToGuess from './data/words-for-guesses.json';
 import Gameboard from './components/Gameboard/Gameboard';
+import Message from './components/Message/Message';
 
-// let wordExample = dictionary[Math.floor(Math.random()*dictionary.length)];
-let wordExample = 'loose';
+// let wordExample = wordsToGuess[Math.floor(Math.random()*wordsToGuess.length)];
+let wordExample = 'spout';
 
 function App() {
   const [inputs, setInputs] = useState(getDefaultState());
@@ -27,7 +29,7 @@ function App() {
     setRow(0);
     setMessage({text: '', danger: true});
     setGameOver(false);
-    wordExample = dictionary[Math.floor(Math.random()*dictionary.length)];
+    wordExample = wordsToGuess[Math.floor(Math.random()*wordsToGuess.length)];
   }
   
   // function to handle { inputs } state changes
@@ -83,36 +85,51 @@ function App() {
       }
     })
     return repeats;
-  }
-
-  const checkUserInputValidity = (wordToMatch, currentUserInput) => {
-    const wordArr = wordToMatch.toLowerCase().split('');
-    const {currentRow, start, end} = currentUserInput;
-    const wordArrRepeats = checkForRepeatLetters(wordArr);
-    const rowCopy = [...currentRow.map((item, index) => {
+  };
+  
+  const matchUserInputToWord = (userInput, wordToMatch, repeats) => {
+    return [...userInput.map((item, index) => {
       // handle letter in correct position
-      if (item.input === wordArr[index]) {
-        wordArrRepeats[item.input] -= 1;
+      if (item.input === wordToMatch[index]) {
+        repeats[item.input] -= 1;
         return {
           ...item,
           correctPosition: true
-        };
-      } else
+        }
+      } else {
+        return item;
+      }
+    }).map((item) => {
       // handle letter in wrong position
-      if (wordArr.includes(item.input) && wordArrRepeats[item.input] !== 0) {
-        wordArrRepeats[item.input] -= 1;
+      if (wordToMatch.includes(item.input) && repeats[item.input] !== 0) {
+        repeats[item.input] -= 1;
         return {
           ...item,
           wrongPosition: true
         }
       } else {
+        return item;
+      }
+    }).map((item) => {
       // handle letter not present in word
+      if (item.correctPosition || item.wrongPosition) {
+        return item;
+      } else {
         return {
           ...item,
           notPresent: true
         }
       }
     })];
+  }
+
+  const checkUserInputValidity = (wordToMatch, currentUserInput) => {
+    const wordArr = wordToMatch.toLowerCase().split('');
+    const {currentRow, start, end} = currentUserInput;
+    const wordArrRepeats = checkForRepeatLetters(wordArr);
+
+    const rowCopy = matchUserInputToWord(currentRow, wordArr, wordArrRepeats);
+
     const correctGuess = rowCopy.every((item) => item.correctPosition);
     setInputs((prevState) => [...prevState.slice(0, start), ...rowCopy, ...prevState.slice(end)]);
     return correctGuess;
@@ -163,7 +180,7 @@ function App() {
       changeValue('input', '', index-1);
       setIndex(prev => prev - 1)
     }
-    
+
     // handle character inputs
     if (/^[a-zA-Z]$/.test(input)) {
       if (index >= 5 * (row + 1) || row >= 6) return;
@@ -181,7 +198,7 @@ function App() {
     <div className='container' ref={container} tabIndex={0} onKeyDown={(e) => handleInput(e.key)}>
       <Header />
       <Gameboard inputs={inputs} />
-      {message.text !== '' && <div className={`sysMessage ${message.danger ? 'dangerMsg' : 'correctMsg'}`}>{message.text}</div>}
+      <Message message={message} />
       {gameOver && <button className='resetBtn' onClick={resetGame}>Reset Game</button>}
       {!gameOver && <Keyboard handleClick={handleInput} guesses={inputs} />}
     </div>

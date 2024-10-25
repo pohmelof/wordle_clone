@@ -37,11 +37,11 @@
     place-items: center;
     border: 1px solid var(--color-dark);
     padding: 15px 10px;
+    font-weight: bold;
     background-color: var(--bg-color-light);
     border-radius: 5px;
     user-select: none;
-    animation-delay: 1s;
-    animation-duration: 0ms;
+    animation-delay: 1.2s !important;
     cursor: pointer;
     box-shadow: var(--box-shadow-highlight);
 }

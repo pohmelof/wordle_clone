@@ -1,0 +1,22 @@
+.sysMessage {
+    position: absolute;
+    top: -100px;
+    color: var(--color-light);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    padding: 30px 10px;
+    font-size: 1.5rem;
+    box-shadow: var(--box-shadow-highlight);
+    transition: all 0.5s;
+    border-radius: 0 0 15px 15px;
+  }
+  .sysMessage-active {
+    top: 0;
+  }
+  .dangerMsg {
+    background-color: var(--bg-color-danger);
+  }
+  .correctMsg {
+    background-color: var(--bg-color-correctPos);
+  }

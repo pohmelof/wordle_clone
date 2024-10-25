@@ -3,6 +3,10 @@ header {
     padding: 10px 10px;
     font-size: 3rem;
     font-weight: bold;
-    padding: 40px 0;
-    color: var(--color-light);
+    margin-bottom: 40px;
+    color: var(--bg-color-light);
+    text-shadow: 2px 2px 10px black;
+    border-bottom: 1px solid var(--bg-color-light);
+    width: 100%;
+    box-shadow: 2px 2px 20px 2px var(--color-dark);
 }
