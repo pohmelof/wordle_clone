@@ -24,8 +24,14 @@
     display: grid;
     gap: 5px;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
+    /* grid-auto-columns: minmax(0, 1fr); */
 
+}
+.firstRow {
+    grid-template-columns: repeat(10, 1fr);
+}
+.secondRow {
+    grid-template-columns: repeat(9, 1fr);
 }
 .thirdRow {
     grid-template-columns: 1.5fr repeat(7, 1fr) 1.5fr;
@@ -36,6 +42,7 @@
     place-items: center;
     border: 1px solid var(--color-dark);
     padding: 15px 10px;
+    font-weight: bold;
     background-color: var(--bg-color-light);
     border-radius: 5px;
     user-select: none;

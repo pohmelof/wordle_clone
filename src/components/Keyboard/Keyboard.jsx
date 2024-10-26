@@ -16,22 +16,16 @@ const KeyboardButton = ({value, onclick, addClass}) => {
 
 const Keyboard = ({handleClick, guesses}) => {
     const getBtnClass = (item) => {
-        let guess =  guesses.find(guess => guess.input === item && guess.correctPosition);
-        if (!guess) {
-            guess = guesses.find(guess => guess.input === item && guess.wrongPosition);
-        }
-        if (!guess) {
-            guess = guesses.find(guess => guess.input === item);
-        }
-        let addClass = '';
-        if (!guess) {
-            addClass = '';
+        const filteredGuesses = guesses.filter(guess => guess.input === item);
+        let btnClass;
+        if (filteredGuesses.length === 0) {
+            btnClass = '';
         } else {
-            if (guess.correctPosition) addClass = 'correctPos';
-            if (guess.wrongPosition) addClass = 'wrongPos';
-            if (guess.notPresent) addClass = 'notPresent';
+            btnClass = filteredGuesses.some(item => item.correctPosition) ? 'correctPos':
+                       filteredGuesses.some(item => item.wrongPosition) ? 'wrongPos' : 
+                       filteredGuesses.some(item => item.notPresent) ? 'notPresent' : '';
         }
-        return addClass;
+        return btnClass;
     }
 
     return (
