@@ -22,7 +22,6 @@
 .secondRow,
 .thirdRow {
     display: grid;
-    /* width: 100%; */
     gap: 5px;
     grid-auto-flow: column;
     grid-auto-columns: minmax(0, 1fr);
@@ -37,7 +36,6 @@
     place-items: center;
     border: 1px solid var(--color-dark);
     padding: 15px 10px;
-    font-weight: bold;
     background-color: var(--bg-color-light);
     border-radius: 5px;
     user-select: none;
